@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 require('dotenv').config();
 const fs = require('fs');
-const path = require('path'); // Import only once
+const path = require('path');
 
 if (!process.env.TIDB_CA_PATH) {
     throw new Error('TIDB_CA_PATH is not defined in the environment variables.');
@@ -18,7 +18,7 @@ const conn = mysql.createConnection({
     dialect: 'mysql',
     ssl: process.env.TIDB_ENABLE_SSL === 'true' ? {
         minVersion: 'TLSv1.2',
-        ca: fs.readFileSync(certPath) // Use the resolved path here
+        ca: fs.readFileSync(certPath)
     } : null,
 });
 

@@ -40,7 +40,7 @@ app.post('/signup', async (req, resp) => {
 
           const [existingUser] = await mysqlConn.query('SELECT * FROM users WHERE email = ?', [email]);
           if (existingUser.length > 0) {
-               return res.status(400).json({ error: 'User already exists' });
+               return resp.status(400).json({ error: 'User already exists' });
           }
 
           mysqlConn.query('INSERT INTO users SET ?', data, (error, result, fields) => {
@@ -101,14 +101,14 @@ app.post('/savecontent', async (req, resp) => {
                }
           })
      } catch (error) {
-          console.error("Error:", error); // Log any errors that occur
+          console.error("Error:", error);
           resp.status(500).json({ error: 'Failed to save content' });
      }
 });
 
 
 app.get('/user/:user_id/contents', async (req, resp) => {
-     const { user_id } = req.params; // Extract the user_id value directly
+     const { user_id } = req.params;
 
      try {
           mysqlConn.query('SELECT * FROM contents WHERE user_id = ?', [user_id], (error, result) => { // Pass user_id as an array
