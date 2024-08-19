@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const jwtKey = process.env.JWT;
 const bcrypt = require('bcrypt');
 const Port = process.env.Port
-const mysqlConn = require('../db/config');
+const mysqlConn = require('./db/config');
 
 
 
